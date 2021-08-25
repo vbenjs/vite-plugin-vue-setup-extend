@@ -1,0 +1,41 @@
+name: Npm Publish
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish-npm:
+    if: "contains(github.event.head_commit.message, 'release')"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: use Node.js 16
+        uses: actions/setup-node@v1
+        with:
+          registry-url: https://registry.npmjs.org/
+          node-version: 16
+
+      - name: Get yarn cache
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: npm install and publish
+        run: |
+          yarn
+          cd packages/core
+          npm publish
+
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
