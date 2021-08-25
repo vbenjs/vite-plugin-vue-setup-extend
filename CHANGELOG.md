@@ -1,3 +1,7 @@
+# 0.2.0 (2021-08-25)
+
+
+
 # [2.1.0](https://github.com/vbenjs/vite-plugin-html/compare/v2.0.6...v2.1.0) (2021-08-20)
 
 ### Features
