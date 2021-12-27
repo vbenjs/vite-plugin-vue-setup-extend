@@ -6,5 +6,5 @@
 </template>
 
 <script lang="ts" setup name="App">
-const a = 1
+const a = 1;
 </script>
