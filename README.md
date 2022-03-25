@@ -39,7 +39,7 @@ export default defineConfig({
   <div>hello world {{ a }}</div>
 </template>
 
-<script lang="ts" setup name="App">
+<script lang="ts" setup name="App" inheritAttrs="false">
   const a = 1
 </script>
 ```
