@@ -9,6 +9,7 @@ export function supportScriptName(code: string, id: string) {
     const result = compileScript(descriptor, { id })
     const name = result.attrs.name
     const lang = result.attrs.lang
+    const inheritAttrs = result.attrs.inheritAttrs
     if (name) {
       str().appendLeft(
         0,
@@ -16,6 +17,7 @@ export function supportScriptName(code: string, id: string) {
 import { defineComponent } from 'vue'
 export default defineComponent({
   name: '${name}',
+  ${inheritAttrs ? `inheritAttrs: ${inheritAttrs !== 'false'},` : ''}
 })
 </script>\n`,
       )
